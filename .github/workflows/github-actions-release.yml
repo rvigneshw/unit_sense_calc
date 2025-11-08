@@ -1,0 +1,56 @@
+name: Release Automation
+
+on:
+  push:
+    branches:
+      - main
+
+  release:
+    types: [published]
+
+jobs:
+  deploy_web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-flutter@v1
+        with:
+          flutter-version: '3.x'
+      - run: flutter build web --release
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          publish_branch: gh-pages
+
+  build_binaries:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: windows
+            os: windows-latest
+          - target: macos
+            os: macos-latest
+          - target: linux
+            os: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-flutter@v1
+        with:
+          flutter-version: '3.x'
+      - name: Build ${{ matrix.target }}
+        run: flutter build ${{ matrix.target }} --release
+
+      - name: Upload ${{ matrix.target }} Artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/${{ matrix.target }}/outputs/flutter-runner/${{ matrix.target }}-release.zip
+          asset_name: unitsense_calc-${{ matrix.target }}.zip
+          asset_content_type: application/zip
