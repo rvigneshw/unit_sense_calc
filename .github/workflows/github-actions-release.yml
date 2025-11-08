@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-flutter@v1
+      - uses: flutter-actions/setup-flutter@v3
         with:
           flutter-version: '3.x'
       - run: flutter build web --release
@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-flutter@v1
+      - uses: flutter-actions/setup-flutter@v3
         with:
           flutter-version: '3.x'
       - name: Build ${{ matrix.target }}

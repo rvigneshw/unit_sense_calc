@@ -14,7 +14,7 @@ The workflow automatically builds and deploys the web app to GitHub Pages on eve
 2.  Set the Source to Deploy from a branch.
 3.  For the Branch, select `gh-pages` and `/ (root)`. (The workflow will create and push to this branch automatically).
 
-Your web app will be live at `https://<username>.github.io/unitsense-flutter/` (assuming your repo is named `unitsense-flutter`).
+Web app will be live at `https://rvigneshw.github.io/unit_sense_calc/`
 
 ### Release Binaries
 
