@@ -1,16 +1,31 @@
-# unit_sense_calc
+## About UnitSense Calculator
 
-A new Flutter project.
+UnitSense Calculator is a Flutter application that supports complex math, unit consistency, and Data Rate Projections. It allows users to enter expressions with units and calculates the result, displaying it in a user-friendly format. It supports data, numbers, time, and length units.
 
-## Getting Started
+## GitHub Actions Setup
 
-This project is a starting point for a Flutter application.
+This project uses GitHub Actions for continuous integration and deployment. The workflow file is located in `.github/workflows/github-actions-release.yml`.
 
-A few resources to get you started if this is your first Flutter project:
+### Web Deployment
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The workflow automatically builds and deploys the web app to GitHub Pages on every push to the `main` branch. To enable GitHub Pages:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1.  Go to Settings > Pages.
+2.  Set the Source to Deploy from a branch.
+3.  For the Branch, select `gh-pages` and `/ (root)`. (The workflow will create and push to this branch automatically).
+
+Your web app will be live at `https://<username>.github.io/unitsense-flutter/` (assuming your repo is named `unitsense-flutter`).
+
+### Release Binaries
+
+The workflow also builds Windows, macOS, and Linux executables when a new GitHub Release is published and attaches them to that release. To create a release:
+
+1.  Go to the Releases section of your GitHub repository.
+2.  Draft a new release (e.g., using tag `v1.0.0`).
+3.  Publish the release.
+
+The desktop binaries will automatically appear attached to your release post.
+
+### Workflow Permissions
+
+Ensure Workflow permissions are set to allow GitHub Actions to write to the repository. Go to Settings > Actions > General and select Read and write permissions.
