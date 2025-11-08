@@ -28,4 +28,4 @@ The desktop binaries will automatically appear attached to your release post.
 
 ### Workflow Permissions
 
-Ensure Workflow permissions are set to allow GitHub Actions to write to the repository. Go to Settings > Actions > General and select Read and write permissions.
+**Important:** Ensure Workflow permissions are set to allow GitHub Actions to write to the repository. Go to Settings > Actions > General and select **Read and write permissions**. This is required for the workflow to deploy the web app to GitHub Pages and attach the release binaries.
